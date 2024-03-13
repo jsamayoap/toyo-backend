@@ -11,4 +11,5 @@ public interface IDoctorRepository<TI, TC>
     Task DeleteDoctor(TI id);
     Task<IEnumerable<DoctorEntityModel<TI, TC>>> GetDoctor(TI doctorID);
     Task<IEnumerable<DoctorEntityModel<TI, TC>>?> GetDoctor();
+    Task<IEnumerable<DoctorOutputModel<TI>>?> GetDoctorCustom();
 }

@@ -16,9 +16,8 @@ public sealed class DoctorBusiness<TI, TC>(IDoctorRepository<TI, TC> doctorRepos
         return new DoctorModel<TI>(x, doctor);
     }
 
-    public async Task<IEnumerable<DoctorModel<TI>>?> GetDoctores()
+    public async Task<IEnumerable<DoctorOutputModel<TI>>?> GetDoctores()
     {
-        var x = await doctorRepository.GetDoctor().ConfigureAwait(false);
-        return x?.Select(x => (DoctorModel<TI>)x);
+        return await doctorRepository.GetDoctorCustom().ConfigureAwait(false);
     }
 }

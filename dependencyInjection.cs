@@ -7,6 +7,7 @@ using code.common;
 using code.interfaces;
 using code.Interfaces;
 using code.providers.sqlServer;
+using code.queries;
 using code.queries.sqlServer;
 using code.repositories.impl;
 using code.repositories.services;

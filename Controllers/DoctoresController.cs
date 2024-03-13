@@ -12,7 +12,7 @@ public class DoctoresController(IDoctorBusiness<int> doctorBusiness) : Controlle
     private readonly IDoctorBusiness<int> doctorBusiness = doctorBusiness;
 
     [HttpGet]
-    public async Task<IEnumerable<DoctorModel<int>>?> Get() => await doctorBusiness.GetDoctores().ConfigureAwait(false);
+    public async Task<IEnumerable<DoctorOutputModel<int>>?> Get() => await doctorBusiness.GetDoctores().ConfigureAwait(false);
 
     [HttpPost]
     public async Task<DoctorModel<int>> Add(DoctorModel<int> doctor) => await doctorBusiness.AddDoctor(doctor).ConfigureAwait(false);

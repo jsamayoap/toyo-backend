@@ -1,11 +1,17 @@
-using code.interfaces;
-
 namespace code.queries.sqlServer;
-
-public interface IQDoctor : ISQLData {}
 
 public sealed class qDoctor : IQDoctor
 {
+    private const string _customDoctor = @"
+SELECT a.[doctor]
+      ,a.[nombres]
+      ,a.[apellido_paterno]
+      ,a.[apellido_materno]
+      ,a.[fecha_nacimiento]
+      ,b.[nombre] [Especialidad]
+  FROM [dbo].[Doctor] a
+  INNER JOIN [dbo].[Especialidad] b
+     ON a.[especialidad] = b.[especialidad]";
     private const string _selectAll = @"
 SELECT [doctor]
       ,[nombres]
@@ -15,7 +21,7 @@ SELECT [doctor]
       ,[especialidad]
   FROM [dbo].[Doctor]";
 
-      private const string _selectOne = @"
+    private const string _selectOne = @"
 SELECT [doctor]
       ,[nombres]
       ,[apellido_paterno]
@@ -25,16 +31,16 @@ SELECT [doctor]
   FROM [dbo].[Doctor]
   WHERE [dbo].[Doctor].[doctor]=@DOCTOR";
 
-private const string _delete = @"
+    private const string _delete = @"
 DELETE FROM [dbo].[Doctor]
 WHERE [dbo].[Doctor].[doctor]=@DOCTOR";
 
-private const string _update = @"
+    private const string _update = @"
 UPDATE [dbo].[Doctor]
 SET [dbo].[Doctor].[nombres] = @NOMBRES
 WHERE [dbo].[Doctor].[doctor]=@DOCTOR";
 
-private const string _add = @"
+    private const string _add = @"
 INSERT INTO [dbo].[Doctor]
            ([nombres]
            ,[apellido_paterno]
@@ -58,4 +64,6 @@ VALUES
     public string DeleteDataEntity => _delete;
 
     public string UpdateWholeEntity => _update;
+
+    public string CustomDoctores => _customDoctor;
 }

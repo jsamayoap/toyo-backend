@@ -6,5 +6,5 @@ public interface IDoctorBusiness<TI>
  where TI : struct, IEquatable<TI>
 {
     Task<DoctorModel<TI>> AddDoctor(DoctorModel<TI> doctor);
-    Task<IEnumerable<DoctorModel<TI>>?> GetDoctores();
+    Task<IEnumerable<DoctorOutputModel<TI>>?> GetDoctores();
 }

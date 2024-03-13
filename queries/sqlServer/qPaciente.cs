@@ -1,8 +1,4 @@
-using code.interfaces;
-
 namespace code.queries.sqlServer;
-
-public interface IQPaciente : ISQLData {}
 
 public sealed class qPaciente : IQPaciente
 {

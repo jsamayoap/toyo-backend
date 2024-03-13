@@ -3,21 +3,20 @@ using code.entityModels;
 using code.interfaces;
 using code.Interfaces;
 using code.models;
+using code.queries;
 using code.repositories.services;
 using Dapper;
 
 namespace code.repositories.impl;
 
-public sealed class DoctorRepository<TI, TC> : DataAccess<DoctorEntityModel<TI, TC>, TI, TC>, IDoctorRepository<TI, TC>
+public sealed class DoctorRepository<TI, TC>(IRelationalContext<TC> rkm,
+                                             ISQLData queries,
+                                             ILogger<DoctorRepository<TI, TC>> logger) 
+                                             : DataAccess<DoctorEntityModel<TI, TC>, TI, TC>(rkm, queries, logger), 
+                                               IDoctorRepository<TI, TC>
         where TI : struct, IEquatable<TI>
         where TC : struct
 {
-    public DoctorRepository(IRelationalContext<TC> rkm,
-                            ISQLData queries,
-                            ILogger<DoctorRepository<TI, TC>> logger) : base(rkm, queries, logger)
-    {
-    }
-
     public async Task<TI> AddDoctor(DoctorModel<TI> doctor)
     {
         var p = new DynamicParameters();
@@ -42,6 +41,11 @@ public sealed class DoctorRepository<TI, TC> : DataAccess<DoctorEntityModel<TI, 
     public async Task<IEnumerable<DoctorEntityModel<TI, TC>>?> GetDoctor()
     {
         return await GetALL(null).ConfigureAwait(false);
+    }
+
+    public async Task<IEnumerable<DoctorOutputModel<TI>>?> GetDoctorCustom()
+    {
+        return await this.Get<DoctorOutputModel<TI>>(null, ((IQDoctor)this.queries).CustomDoctores).ConfigureAwait(false);
     }
 
     public Task UpdateDoctor(DoctorModel<TI> updatedDoctor)
