@@ -8,6 +8,7 @@ SELECT a.[doctor]
       ,a.[apellido_paterno]
       ,a.[apellido_materno]
       ,a.[fecha_nacimiento]
+      ,a.[especialidad] [especialidadID]
       ,b.[nombre] [Especialidad]
   FROM [dbo].[Doctor] a
   INNER JOIN [dbo].[Especialidad] b
