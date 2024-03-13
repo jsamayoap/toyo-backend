@@ -1,0 +1,6 @@
+@code_HostAddress = http://localhost:5057
+
+GET {{code_HostAddress}}/Doctores/
+Accept: application/json
+
+###
